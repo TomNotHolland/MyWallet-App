@@ -1,13 +1,13 @@
-import Header from './components/Navigator'
-import './index.css'
+import Navigator from './components/Navigator'
 import MenuStateProvider from './states/MenuState'
+import './tailwind.css'
 
 export default function App() {
 
   return (
     <div>
       <MenuStateProvider>
-        <Header />
+        <Navigator />
       </MenuStateProvider>
     </div>
   )
