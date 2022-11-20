@@ -1,14 +1,15 @@
-import Navigator from './components/Navigator'
-import MenuStateProvider from './states/MenuState'
+import Sidebar from './components/Sidebar'
+import Navbar from './components/Navbar'
+import Page from './components/Page'
 import './tailwind.css'
 
 export default function App() {
-
   return (
-    <div>
-      <MenuStateProvider>
-        <Navigator />
-      </MenuStateProvider>
+    <div className="flex">
+      <Sidebar />
+      <Page>
+        <Navbar />
+      </Page>
     </div>
   )
 }
