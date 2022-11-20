@@ -1,33 +1,74 @@
-import { Cardholder, List } from "phosphor-react";
-import { useMenu } from '../hooks/MenuHook';
-import Accordion from "./Accordion";
-import { AccordionOption } from "./AccordionOption";
-import NavHeader from "./NavHeader";
+import { Money, List, Gauge, Notepad, CaretDown } from "phosphor-react"
+import { createElement, useState } from 'react';
+import { Link } from "react-router-dom";
 
-export default function Sidebar() {
-  const { openMenu, setOpenMenu } = useMenu()
+const Sidebar = () => {
+  const [openSidebar, setOpenSidebar] = useState(false)
+  const [openSuboption, setOpenSuboption] = useState(true)
+
+  const menuItems = [{
+    name: "Dashboard",
+    icon: Gauge,
+    link: '/'
+  },
+  {
+    name: "Registrations",
+    icon: Notepad,
+    link: '/registrations',
+    subIcon: Money,
+    subLink: '/billingcycles',
+    suboptionName: ["Billing Cycle"]
+  }]
 
   return (
-    <section className="flex">
-      <aside className={`flex flex-col relative bg-zinc-900 min-h-screen gap-y-5 ${openMenu ? "w-16" : "w-72"} duration-500`}>
-        <div className="flex justify-between">
-          <a href="#" className={`flex cursor-pointer select-none mt-4 duration-500
-            ${!openMenu ? "justify-start ml-4 text-yellow-500 text-xl"
-              : "opacity-0 overflow-hidden"}`}>
-            MyWallet
-            <Cardholder size={32} weight="light" className="ml-3 min-w-fit" />
-          </a>
-          <div className={`${!openMenu ? "self-end" : "self-end mr-3"}`} onClick={() => setOpenMenu(!openMenu)}>
-            <List size={32} className={`duration-500 text-yellow-500 cursor-pointer 
-            ${openMenu ? "-translate-x-1"
-              : "-translate-x-3"}`} />
-          </div>
+    <aside className={`bg-[#01334E] h-screen text-white duration-500 ${!openSidebar ? 'w-14' : 'w-72'}`}>
+      <header className="flex items-center h-16 bg-sky-900 text-yellow-500 select-none">
+        <div className="flex text-lg">
+          <button onClick={() => [setOpenSidebar(!openSidebar),
+          setOpenSuboption(!openSidebar && openSuboption ? !openSuboption : openSuboption),
+          setOpenSuboption(openSidebar && !openSuboption ? !openSuboption : openSuboption)]}
+            className="ml-3">
+            <List size={28} />
+          </button>
+          <span className={`flex gap-x-3 ml-6 duration-300 ${!openSidebar ? 'overflow-hidden hidden' : ''}`}>
+            Menu
+          </span>
         </div>
-        <Accordion>
-          <AccordionOption />
-        </Accordion>
-      </aside>
-      <NavHeader />
-    </section>
-  );
+      </header>
+      {menuItems?.map(({ name, icon, link, subIcon, subLink, suboptionName }, index) => (
+        <section className="duration-100" key={index} style={{ transitionDelay: `${index + 3}00ms` }}>
+          {!suboptionName && (
+            <Link to={link} className="flex text-yellow-500 overflow-hidden h-12 items-center duration-300 hover:bg-slate-100 hover:text-[#01334E]">
+              <div className="flex gap-3 items-center">
+                {createElement(icon, { size: 28, className: 'mx-3' })}
+                <span className={`${!openSidebar ? 'hidden' : ''}`}>{name}</span>
+              </div>
+            </Link>
+          )}
+          {suboptionName && (
+            <>
+              <Link to={link} onClick={() => setOpenSuboption(!openSidebar ? openSuboption : !openSuboption)}
+                className="flex relative z-10 duration-300 text-yellow-500 h-12 items-center hover:bg-slate-200 
+                  hover:text-[#01334E] border-l-[0.1875rem] border-yellow-500 hover:border-cyan-800">
+                <div className="flex justify-between gap-3 items-center">
+                  {createElement(icon, { size: 28, className: 'mx-2.5' })}
+                  <span className={`${!openSidebar ? 'hidden' : ''}`}>{name}</span>
+                  <CaretDown size={18} className={` ml-10 duration-200 ${!openSidebar ? 'hidden' : ''} ${!openSuboption ? 'rotate-180' : ''}`} />
+                </div>
+              </Link>
+              <Link to={`${link}${subLink}`}
+                className={`flex gap-2 text-sm bg-sky-900 hover:bg-cyan-800 items-center border-l-[0.1875rem] border-white duration-300 
+                  ${!openSuboption ? 'h-10 z-0' : '-z-10 relative -translate-y-6 h-0'}
+                  ${!openSidebar && !setOpenSuboption}`}>
+                {createElement(subIcon, { size: 28, className: `mx-3` })}
+                {suboptionName}
+              </Link>
+            </>
+          )}
+        </section>
+      ))}
+    </aside>
+  )
 }
+
+export default Sidebar
