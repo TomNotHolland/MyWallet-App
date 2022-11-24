@@ -14,14 +14,15 @@ const Sidebar = () => {
   {
     name: "Registrations",
     icon: Notepad,
-    link: '/registrations',
+    link: '#',
     subIcon: Money,
-    subLink: '/billingcycles',
+    subLink: '/billingcycle',
     suboptionName: ["Billing Cycle"]
   }]
 
   return (
-    <aside className={`bg-[#01334E] h-screen text-white duration-500 ${!openSidebar ? 'w-14' : 'w-72'}`}>
+    <aside className={`bg-[#01334E] h-screen text-white duration-500 
+      ${!openSidebar ? 'w-14' : 'w-72 mobile:absolute mobile:z-10 mobile:w-52'}`}>
       <header className="flex items-center h-16 bg-sky-900 text-yellow-500 select-none">
         <div className="flex text-lg">
           <button onClick={() => [setOpenSidebar(!openSidebar),
@@ -42,22 +43,23 @@ const Sidebar = () => {
               <div className="flex gap-3 items-center">
                 {createElement(icon, { size: 28, className: 'mx-3' })}
                 <span className={`${!openSidebar ? 'hidden' : ''}`}>{name}</span>
-              </div>
+              </div>  
             </Link>
           )}
           {suboptionName && (
             <>
               <Link to={link} onClick={() => setOpenSuboption(!openSidebar ? openSuboption : !openSuboption)}
-                className="flex relative z-10 duration-300 text-yellow-500 h-12 items-center hover:bg-slate-200 
+                className="flex relative z-10 duration-300 overflow-hidden text-yellow-500 h-12 items-center hover:bg-slate-200 
                   hover:text-[#01334E] border-l-[0.1875rem] border-yellow-500 hover:border-cyan-800">
                 <div className="flex justify-between gap-3 items-center">
                   {createElement(icon, { size: 28, className: 'mx-2.5' })}
                   <span className={`${!openSidebar ? 'hidden' : ''}`}>{name}</span>
-                  <CaretDown size={18} className={` ml-10 duration-200 ${!openSidebar ? 'hidden' : ''} ${!openSuboption ? 'rotate-180' : ''}`} />
+                  <CaretDown size={18} className={` ml-10 mobile:mx-2 tablet:mx-2 laptop:ml-6 lg-laptop:ml-8 duration-200 
+                  ${!openSidebar ? 'hidden' : ''} ${!openSuboption ? 'rotate-180' : ''}`} />
                 </div>
               </Link>
-              <Link to={`${link}${subLink}`}
-                className={`flex gap-2 text-sm bg-sky-900 hover:bg-cyan-800 items-center border-l-[0.1875rem] border-white duration-300 
+              <Link to={subLink}
+                className={`flex gap-2 text-sm overflow-hidden bg-sky-900 hover:bg-cyan-800 items-center border-l-[0.1875rem] border-white duration-300 
                   ${!openSuboption ? 'h-10 z-0' : '-z-10 relative -translate-y-6 h-0'}
                   ${!openSidebar && !setOpenSuboption}`}>
                 {createElement(subIcon, { size: 28, className: `mx-3` })}
