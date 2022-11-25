@@ -21,8 +21,8 @@ const Sidebar = () => {
   }]
 
   return (
-    <aside className={`bg-[#01334E] h-screen text-white duration-500 
-      ${!openSidebar ? 'w-14' : 'w-72 mobile:absolute mobile:z-10 mobile:w-52'}`}>
+    <aside className={`bg-[#01334E] h-screen text-white duration-500
+      ${!openSidebar ? 'w-14' : 'w-72 mobile:w-52 mobile:absolute'}`}>
       <header className="flex items-center h-16 bg-sky-900 text-yellow-500 select-none">
         <div className="flex text-lg">
           <button onClick={() => [setOpenSidebar(!openSidebar),
