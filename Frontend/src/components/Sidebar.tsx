@@ -1,4 +1,4 @@
-import { Money, List, Gauge, Notepad, CaretDown } from "phosphor-react"
+import { Money, List, Gauge, Notepad, CaretDown, CurrencyBtc } from "phosphor-react"
 import { createElement, useState } from 'react';
 import { Link } from "react-router-dom";
 
@@ -18,12 +18,16 @@ const Sidebar = () => {
     subIcon: Money,
     subLink: '/billingcycle',
     suboptionName: ["Billing Cycle"]
+  },{
+    name: "Buy Cripto",
+    icon: CurrencyBtc,
+    link: '#'
   }]
 
   return (
-    <aside className={`bg-[#01334E] h-screen text-white duration-500
+    <aside className={`bg-zinc-900 h-screen text-white duration-500
       ${!openSidebar ? 'w-14' : 'w-72 mobile:w-52 mobile:absolute'}`}>
-      <header className="flex items-center h-16 bg-sky-900 text-yellow-500 select-none">
+      <header className="flex items-center h-16 bg-sky-900 text-white select-none">
         <div className="flex text-lg">
           <button onClick={() => [setOpenSidebar(!openSidebar),
           setOpenSuboption(!openSidebar && openSuboption ? !openSuboption : openSuboption),
@@ -37,9 +41,9 @@ const Sidebar = () => {
         </div>
       </header>
       {menuItems?.map(({ name, icon, link, subIcon, subLink, suboptionName }, index) => (
-        <section className="duration-100" key={index} style={{ transitionDelay: `${index + 3}00ms` }}>
+        <section className="duration-100 whitespace-nowrap" key={index} style={{ transitionDelay: `${index + 3}00ms` }}>
           {!suboptionName && (
-            <Link to={link} className="flex text-yellow-500 overflow-hidden h-12 items-center duration-300 hover:bg-slate-100 hover:text-[#01334E]">
+            <Link to={link} className="flex text-white overflow-hidden h-12 items-center duration-300 hover:bg-sky-800 ">
               <div className="flex gap-3 items-center">
                 {createElement(icon, { size: 28, className: 'mx-3' })}
                 <span className={`${!openSidebar ? 'hidden' : ''}`}>{name}</span>
@@ -49,8 +53,8 @@ const Sidebar = () => {
           {suboptionName && (
             <>
               <Link to={link} onClick={() => setOpenSuboption(!openSidebar ? openSuboption : !openSuboption)}
-                className="flex relative z-10 duration-300 overflow-hidden text-yellow-500 h-12 items-center hover:bg-slate-200 
-                  hover:text-[#01334E] border-l-[0.1875rem] border-yellow-500 hover:border-cyan-800">
+                className="flex whitespace-nowrap relative z-10 duration-300 overflow-hidden text-white h-12 items-center hover:bg-sky-800 
+                  border-l-[0.1875rem]">
                 <div className="flex justify-between gap-3 items-center">
                   {createElement(icon, { size: 28, className: 'mx-2.5' })}
                   <span className={`${!openSidebar ? 'hidden' : ''}`}>{name}</span>
@@ -59,7 +63,8 @@ const Sidebar = () => {
                 </div>
               </Link>
               <Link to={subLink}
-                className={`flex gap-2 text-sm overflow-hidden bg-sky-900 hover:bg-cyan-800 items-center border-l-[0.1875rem] border-white duration-300 
+                className={`flex gap-2 text-sm overflow-hidden bg-zinc-800 hover:bg-cyan-800
+                items-center duration-300 
                   ${!openSuboption ? 'h-10 z-0' : '-z-10 relative -translate-y-6 h-0'}
                   ${!openSidebar && !setOpenSuboption}`}>
                 {createElement(subIcon, { size: 28, className: `mx-3` })}

@@ -1,9 +1,7 @@
-import { configureStore } from '@reduxjs/toolkit'
-import Reducers from './Reducers'
+import { createStore, applyMiddleware } from '@reduxjs/toolkit';
+import promiseMiddleware from "redux-promise";
+import RootReducers from "./Reducers";
 
-export const ReduxStore = configureStore({
-  reducer: {Reducers}
-})
+const ReduxStore = applyMiddleware(promiseMiddleware)(createStore)(RootReducers)
 
-export type RootState = ReturnType<typeof ReduxStore.getState>
-export type AppDispatch = typeof ReduxStore.dispatch
+export default ReduxStore;
