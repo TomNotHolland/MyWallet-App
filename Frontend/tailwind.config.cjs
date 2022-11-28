@@ -3,7 +3,6 @@ module.exports = {
   content: [
     './index.html',
     './src/components/*.tsx',
-    './src/components/pages/*.tsx',
     './src/components/pages/**/*.tsx',
     './src/routes/*tsx.',
     './src/main/*.tsx'
