@@ -37,7 +37,7 @@ const Sidebar = () => {
         </div>
       </header>
       {menuItems?.map(({ name, icon, link, subIcon, subLink, suboptionName }, index) => (
-        <section className="duration-100" key={index} style={{ transitionDelay: `${index + 3}00ms` }}>
+        <section className="duration-100 whitespace-nowrap" key={index} style={{ transitionDelay: `${index + 3}00ms` }}>
           {!suboptionName && (
             <Link to={link} className="flex text-white overflow-hidden h-12 items-center duration-300 hover:bg-sky-800">
               <div className="flex gap-3 items-center">
@@ -49,7 +49,7 @@ const Sidebar = () => {
           {suboptionName && (
             <>
               <Link to={link} onClick={() => setOpenSuboption(!openSidebar ? openSuboption : !openSuboption)}
-                className="flex relative z-10 duration-300 overflow-hidden text-white h-12 items-center hover:bg-sky-800 border-l-[0.1875rem]">
+                className="flex relative z-10 duration-300 whitespace-nowrap overflow-hidden text-white h-12 items-center hover:bg-sky-800 border-l-[0.1875rem]">
                 <div className="flex justify-between gap-3 items-center">
                   {createElement(icon, { size: 28, className: 'mx-2.5' })}
                   <span className={`${!openSidebar ? 'hidden' : ''}`}>{name}</span>
