@@ -20,7 +20,7 @@ BillingCycle.route('get', (req, res, next) => {
   })
 })
 
-//? 🇬🇧/🇺🇸 Displaying errors and data register as JSON
+//? 🇬🇧/🇺🇸 Displaying errors and data counting as JSON
 //? 🇧🇷/🇵🇹 Mostrando erros e contagem de dados como JSON
 BillingCycle.route('count', (req, res, next) => {
   BillingCycle.count((error, value) => {
