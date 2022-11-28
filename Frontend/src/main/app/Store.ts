@@ -1,5 +1,7 @@
-import { applyMiddleware, createStore } from '@reduxjs/toolkit'
-import RootReducer from './Reducers'
-import promiseMiddleware from 'redux-promise'
+import { createStore, applyMiddleware } from '@reduxjs/toolkit';
+import promiseMiddleware from "redux-promise";
+import RootReducers from "./Reducers";
 
-export const ReduxStore = applyMiddleware(promiseMiddleware)(createStore)(RootReducer)
+const ReduxStore = applyMiddleware(promiseMiddleware)(createStore)(RootReducers)
+
+export default ReduxStore;
