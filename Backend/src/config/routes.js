@@ -8,5 +8,5 @@ module.exports = function (server) {
   //? 🇬🇧/🇺🇸 Billing Cycle routes
   //? 🇧🇷/🇵🇹 Rotas de Ciclo de Pagamento
   const BillingCycle = require('../api/billingCycle/billingCycleService')
-  BillingCycle.register(router, '/billingcycle')
+  BillingCycle.register(router, '/billingCycles')
 }
