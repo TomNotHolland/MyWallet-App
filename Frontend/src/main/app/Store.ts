@@ -1,7 +1,24 @@
-import { createStore, applyMiddleware } from '@reduxjs/toolkit';
-import promiseMiddleware from "redux-promise";
-import RootReducers from "./Reducers";
+import { configureStore } from "@reduxjs/toolkit"
+import DashboardSlice from '../../components/pages/Dashboard/DashboardSlice';
+import TabSlice from "../../components/pages/BillingCycle/TabSlice";
 
-const ReduxStore = applyMiddleware(promiseMiddleware)(createStore)(RootReducers)
+declare global {
+	interface Window {
+		__REDUX_DEVTOOLS_EXTENSION__?: any;
+	}
+}
 
-export default ReduxStore;
+const DevTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+
+export const ReduxStore = configureStore({
+	reducer: {
+    dashboard: DashboardSlice.reducer,
+    tab: TabSlice.reducer
+  },
+  devTools: DevTools
+})
+
+export type RootState = ReturnType<typeof ReduxStore.getState>
+export type AppDispatch = typeof ReduxStore.dispatch
+
+export default ReduxStore
