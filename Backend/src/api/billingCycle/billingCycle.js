@@ -1,7 +1,6 @@
 const restful = require('node-restful')
 const mongoose = restful.mongoose
 
-
 //? 🇬🇧/🇺🇲 Object-Document Mapping
 //? 🇧🇷/🇵🇹 Mapeamento do Objeto-Documento
 
