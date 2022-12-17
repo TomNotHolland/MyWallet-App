@@ -1,11 +1,19 @@
-import { createElement, useState } from 'react';
+import { createElement, useEffect } from 'react'
 import PageWrapper from '../../PageWrapper'
-import ContentHeader from '../../ContentHeader';
-import { ListChecks, Plus, Swap, Trash } from 'phosphor-react';
-import { Tab } from '@headlessui/react';
+import ContentHeader from '../../ContentHeader'
+import { ListChecks, Plus, Swap, Trash } from 'phosphor-react'
+import { Tab } from '@headlessui/react'
+import { useAppDispatch } from '../../../main/app/Hooks'
+import { selectTab } from './TabSlice'
+import List from './BillingCycleList'
+import Form from './BillingCycleForm'
 
 export const BillingCycle = () => {
-  const [OpenTab, SetOpenTab] = useState(false)
+  const Dispatch = useAppDispatch()
+
+  useEffect(() => {
+    Dispatch(selectTab('list'))
+  }, [Dispatch])
 
   const navigation = {
     tabs: [
@@ -19,7 +27,7 @@ export const BillingCycle = () => {
         borderStyle: 'rounded-tl-lg',
         icon: createElement(ListChecks, { size: 24 }),
         content: [{
-          name: 'List'
+          data: <List />
         }]
       },
       {
@@ -31,7 +39,7 @@ export const BillingCycle = () => {
         bgColour: 'bg-green-700/30',
         icon: createElement(Plus, { size: 24 }),
         content: [{
-          name: 'Include'
+          data: <Form />
         }]
       },
       {
@@ -43,7 +51,7 @@ export const BillingCycle = () => {
         bgColour: 'bg-yellow-700/30',
         icon: createElement(Swap, { size: 24 }),
         content: [{
-          name: 'Modify'
+          data: <></>
         }]
       },
       {
@@ -57,7 +65,7 @@ export const BillingCycle = () => {
         icon: createElement(Trash, { size: 24 }),
         content: [
           {
-            name: 'Delete'
+            data: <></>
           }
         ]
       }
@@ -68,17 +76,17 @@ export const BillingCycle = () => {
     <PageWrapper>
       <ContentHeader title='Billing Cycle' subtitle='Registration' />
       <Tab.Group>
-        <div className='flex bg-white h-[88%] mx-3 my-4 rounded-lg drop-shadow-lg'>
-          <Tab.List className='flex items-center justify-start h-12 border-b-[1px] w-full drop-shadow-sm'>
-            {navigation.tabs.map((tab) => (
-              <Tab key={tab.id} className={`outline-none text-gray-700 ease-out duration-200 hover:${tab.borderColour} ${tab.hoverColour}`}>
+        <div className='flex bg-white h-[88.1%] mx-3 my-4 rounded-lg drop-shadow-lg'>
+          <Tab.List className='flex items-center justify-start h-12 border-b-[1px] w-full'>
+            {navigation.tabs.map(({ id, borderStyle, bgColour, hoverColour, borderColour, textColour, icon, name }) => (
+              <Tab key={id} onClick={() => Dispatch(selectTab(id))} className={`outline-none text-gray-700 ease-out duration-200 hover:${borderColour} ${hoverColour}`}>
                 {({ selected }) => (
-                  <a className={`flex items-center ${tab?.borderStyle} hover:${tab.bgColour}
-                    opacity-100 justify-center px-2 gap-x-1.5 h-12 ${tab.bgColour} mobile:px-4
-                    ${selected ? `border-b-2 ${tab.borderColour} ${tab.textColour}` : 'border-transparent opacity-[85%] border-b-2 transition-colors ease-out'}`} >
-                    {tab.icon}
+                  <a className={`flex items-center ${borderStyle} hover:${bgColour}
+                    opacity-100 justify-center px-2 gap-x-1.5 h-12 ${bgColour} mobile:px-4
+                    ${selected ? `border-b-2 ${borderColour} ${textColour}` : 'border-transparent opacity-[85%] border-b-2 transition-colors ease-out'}`} >
+                    {icon}
                     <div className='mx-1 mobile:hidden overflow-hidden'>
-                      {tab.name}
+                      {name}
                     </div>
                   </a>
                 )}
@@ -86,9 +94,13 @@ export const BillingCycle = () => {
             ))}
           </Tab.List>
           <Tab.Panels>
-            {navigation.tabs.map(({ content, id }) => content.map(({ name }) => (
-              <Tab.Panel key={id} className='absolute inset-x-0 inset-y-12 mx-2 mt-3 text-4xl'>
-                {name}
+            {/* 🇬🇧/🇺🇸 Mapping object sub-array inside of objects array */}
+            {/* 🇧🇷/🇵🇹 Mapeamento de sub-array de objetos dentro de um array de objetos  */}
+            {navigation.tabs.map(({ id, content }) => content?.map((item) => (
+              <Tab.Panel
+                key={id}
+                className='flex absolute inset-x-1 mx-1 h-[92%] inset-y-14'>
+                {item.data}
               </Tab.Panel>
             )))}
           </Tab.Panels>
