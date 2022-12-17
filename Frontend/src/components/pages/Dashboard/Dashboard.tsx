@@ -15,7 +15,7 @@ const Dashboard = () => {
   useEffect(() => {
     Dispatch(fetchDashboard(`${BackendURL}/billingcycle/summary`))
   }, [Dispatch])
-ga
+
   const iconStyle = 'text-zinc-800 opacity-20 self-center group-hover:scale-125 duration-200 mr-3'
   const iconSize = 120
   const SummaryInfo = [{
