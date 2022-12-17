@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 export const fetchDashboard = createAsyncThunk(
 	'Summary',
@@ -18,16 +18,20 @@ const DashboardSlice = createSlice({
 	extraReducers: (builder) => {
 		builder.addCase(fetchDashboard.fulfilled,
       (state, action) => {
-				state.summary = action.payload;
-				state.fetchStatus = 'success';
+				state.summary = action.payload
+				state.fetchStatus = 'success'
 			}).addCase(fetchDashboard.pending,
         (state) => {
-				state.fetchStatus = 'awaiting';
+				state.fetchStatus = 'awaiting data'
 			}).addCase(fetchDashboard.rejected,
         (state) => {
-				state.fetchStatus = 'failed';
-			})
+				state.fetchStatus = 'failed'
+			}).addDefaultCase(
+        (state) => {
+          return state
+        }
+      )
 	},
 })
 
-export default DashboardSlice;
+export default DashboardSlice
