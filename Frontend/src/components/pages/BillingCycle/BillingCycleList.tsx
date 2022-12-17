@@ -17,7 +17,7 @@ const BillingCycleList = () => {
     const List = list || []
 
     return List.map(({ name, month, year }, id) => (
-      <tr key={id} className="flex justify-between pr-[14.4375rem] border-zinc-200 border-b-[1px] mobile:pr-2">
+      <tr key={id} className="flex justify-between pr-[14.4375rem] odd:bg-zinc-200 rounded mobile:pr-2">
         <td className='ml-1 mobile:ml-0 w-24 text-left'>{name}</td>
         <td className='mr-12 mobile:mr-6'>{month}</td>
         <td>{year}</td>
