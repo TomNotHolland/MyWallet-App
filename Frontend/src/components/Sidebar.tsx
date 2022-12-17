@@ -1,27 +1,27 @@
-import { Money, List, Gauge, Notepad, CaretDown } from "phosphor-react"
-import { createElement, useState } from 'react';
-import { Link } from "react-router-dom";
+import { Money, List, Gauge, Notepad, CaretDown } from 'phosphor-react'
+import { createElement, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const Sidebar = () => {
   const [openSidebar, setOpenSidebar] = useState(false)
   const [openSuboption, setOpenSuboption] = useState(true)
 
   const menuItems = [{
-    name: "Dashboard",
+    name: 'Dashboard',
     icon: Gauge,
     link: '/'
   },
   {
-    name: "Registrations",
+    name: 'Registrations',
     icon: Notepad,
     link: '#',
     subIcon: Money,
     subLink: '/billingcycle',
-    suboptionName: ["Billing Cycle"]
+    suboptionName: ['Billing Cycle']
   }]
 
   return (
-    <aside className={`bg-zinc-900 h-screen text-white duration-500
+    <aside className={`bg-zinc-900 h-screen text-white duration-300
       ${!openSidebar ? 'w-14' : 'w-72 mobile:w-52 mobile:absolute'}`}>
       <header className="flex items-center h-16 bg-sky-700 text-white select-none">
         <div className="flex text-lg">
@@ -61,7 +61,7 @@ const Sidebar = () => {
                 className={`flex gap-2 text-sm overflow-hidden bg-zinc-700 hover:bg-sky-900 items-center duration-300 
                   ${!openSuboption ? 'h-10 z-0' : '-z-10 relative -translate-y-6 h-0'}
                   ${!openSidebar && !setOpenSuboption}`}>
-                {createElement(subIcon, { size: 28, className: `mx-3` })}
+                {createElement(subIcon, { size: 28, className: 'mx-3' })}
                 {suboptionName}
               </Link>
             </>
