@@ -1,23 +1,23 @@
-import PageWrapper from "../../PageWrapper"
-import ContentHeader from "../../ContentHeader"
-import { createElement, useEffect } from "react"
-import { Bank, CreditCard, Scales } from "phosphor-react"
-import { fetchDashboard } from "./DashboardSlice"
+import PageWrapper from '../../PageWrapper'
+import ContentHeader from '../../ContentHeader'
+import { createElement, useEffect } from 'react'
+import { Bank, CreditCard, Scales } from 'phosphor-react'
+import { fetchDashboard } from './DashboardSlice'
 import { useAppDispatch, useAppSelector } from '../../../main/app/Hooks'
 
 const Dashboard = () => {
-  const state = useAppSelector((state) => state.dashboard.summary)
-  const { credit, debt } = state
+  const State = useAppSelector((state) => state.dashboard.summary)
+  const { credit, debt } = State
 
-  const dispatch = useAppDispatch()
+  const Dispatch = useAppDispatch()
   const BackendURL = 'http://localhost:3000/api'
 
   useEffect(() => {
-    dispatch(fetchDashboard(`${BackendURL}/billingcycle/summary`))
-  }, [dispatch])
-
+    Dispatch(fetchDashboard(`${BackendURL}/billingcycle/summary`))
+  }, [Dispatch])
+ga
   const iconStyle = 'text-zinc-800 opacity-20 self-center group-hover:scale-125 duration-200 mr-3'
-  const iconSize = 130
+  const iconSize = 120
   const SummaryInfo = [{
     Title: 'Total Credits',
     BgColour: 'bg-green-600',
