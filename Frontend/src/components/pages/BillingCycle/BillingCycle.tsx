@@ -97,9 +97,7 @@ export const BillingCycle = () => {
             {/* 🇬🇧/🇺🇸 Mapping object sub-array inside of objects array */}
             {/* 🇧🇷/🇵🇹 Mapeamento de sub-array de objetos dentro de um array de objetos  */}
             {navigation.tabs.map(({ id, content }) => content?.map((item) => (
-              <Tab.Panel
-                key={id}
-                className='flex absolute inset-x-1 mx-1 h-[92%] inset-y-14'>
+              <Tab.Panel key={id} className='flex absolute inset-x-1 mx-1 h-[92%] inset-y-14'>
                 {item.data}
               </Tab.Panel>
             )))}
