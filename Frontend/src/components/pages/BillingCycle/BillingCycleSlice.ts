@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
 export const getList = createAsyncThunk(
   'List',
@@ -9,9 +10,15 @@ export const getList = createAsyncThunk(
   }
 )
 
-export async function createValues(values: string) {
+export async function createdValues(values: string) {
   const BackendURL = 'http://localhost:3000/api'
-  await axios.post(`${BackendURL}/billingcycle`, values)
+    await axios.post(`${BackendURL}/billingcycle`, values)
+      .then(() => (
+        toast.success('Sucessful operation', { icon: '✅' })
+      ))
+      .catch(error => (
+        error.response.data.errors.forEach((reason: string) => toast.error(`Error: ${reason}`))
+      ))
 }
 
 const BillingCycleSlice = createSlice({
