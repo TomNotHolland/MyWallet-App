@@ -4,15 +4,15 @@ import TabSlice from '../../components/pages/BillingCycle/TabSlice'
 import BillingCycleSlice from '../../components/pages/BillingCycle/BillingCycleSlice'
 
 declare global {
-	interface Window {A
-		__REDUX_DEVTOOLS_EXTENSION__?: () => boolean | undefined
-	}
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION__?: () => boolean | undefined
+  }
 }
 
 const DevTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 
 export const ReduxStore = configureStore({
-	reducer: {
+  reducer: {
     dashboard: DashboardSlice.reducer,
     tab: TabSlice.reducer,
     billingcycle: BillingCycleSlice.reducer,
