@@ -1,23 +1,36 @@
 import { Form, Field } from 'react-final-form'
-import { createValues } from './BillingCycleSlice'
+import { createdValues } from './BillingCycleSlice'
 import { useEffect } from 'react'
 
 const BillingCycleForm = () => {
-
   useEffect(() => {
-    createValues
+    createdValues
   }, [])
 
   return (
-    <Form onSubmit={createValues} component={({ handleSubmit }) => (
-      <form role='form' onSubmit={handleSubmit}>
+    <Form onSubmit={createdValues} initialValues={{}} render={({ handleSubmit, form }) => (
+      <form role='form' onSubmit={event => {
+        handleSubmit(event)?.then(() => form.reset())
+      }}>
         <div className='flex gap-x-1.5 mb-2'>
-          <Field className='border rounded border-zinc-300' name='name' component='input' />
-          <Field className='border rounded border-zinc-300' name='month' component='input' />
-          <Field className='border rounded border-zinc-300' name='year' component='input' />
+          <label className='flex flex-col'>
+            Name
+            <Field placeholder='Insert name' className='pl-2 border rounded border-zinc-300' name='name' component='input' />
+          </label>
+          <label className='flex flex-col'>
+            Month
+            <Field placeholder='Insert month' className='pl-2 border rounded border-zinc-300' name='month' component='input' />
+          </label>
+          <label className='flex flex-col'>
+            Year
+            <Field placeholder='Insert year' className='pl-2 border rounded border-zinc-300' name='year' component='input' />
+          </label>
         </div>
         <div>
-          <button type='submit' className='flex justify-center items-center bg-sky-600 p-1 rounded text-white hover:bg-sky-800 duration-200'>Submit</button>
+          <button type='submit'
+            className='flex justify-center items-center bg-sky-600 p-1 rounded text-white hover:bg-sky-800 duration-200'>
+            Submit
+          </button>
         </div>
       </form>
     )} />
